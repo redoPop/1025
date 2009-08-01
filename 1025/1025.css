@@ -1,0 +1,18 @@
+body {
+	margin: 0;
+}
+
+#start {
+	bottom: 10px;
+	left: 14px;
+	position: absolute;
+}
+
+#status {
+	color: #FFF;
+	font: 12px arial;
+	position: absolute;
+	text-align: center;
+	top: 11px;
+	width: 90px;
+}
