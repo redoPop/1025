@@ -9,8 +9,10 @@ button to skip to break. To stop the clock completely, punch the button
 during break (i.e., twice if it thinks you’re working).
 
 Uses OS X's speech synthesizer to make inconspicuous announcements, so check
-your volume!
+your volume! As of 1.0.2, wee Growl notifications are sent out (thanks, Adam
+Wróbel <amw>, for the idea!)
 
+--
 
 Mac OS X 10.4 Tiger is required. If you’re using Safari, click the download
 link. When the widget download is complete, show Dashboard, click the Plus

@@ -1,5 +1,4 @@
-intervalId = 0;
-on = 0;
+intervalId = 0, on = 0;
 
 function count() {
 	seconds++;
@@ -23,6 +22,18 @@ function countdown() {
 	if (clockSecs.length<2) clockSecs = '0'+clockSecs;
 	text += clockMins+':'+clockSecs;
 	state(text);
+}
+
+function growl(title, body) {
+	setTimeout(function() {
+		widget.system('growl-enabled.sh', function (obj) {
+			var cmd;
+			if (+obj.outputString > 0) {
+				cmd = '/usr/bin/osascript growl-notify.scpt "'+title+'" "(10+2)5" "Dashboard" "'+title+'" "'+body+'"';
+				widget.system(cmd, function (obj) {});
+			}
+		});
+	}, 1);
 }
 
 function init() {
@@ -52,15 +63,18 @@ function startTimer() {
 }
 
 function startWork() {
-	var text = 'Start. ';
 	seconds = 0;
 	working = 1;
+
+	var notifyHour = 0;
 	if (cycles>0 && cycles%5==0) {
 		hours++;
-		text += ' Hour ' + (hours+1);
+		var notifyHour = (hours+1);
 	}
 	cycles++;
-	say(text);
+
+	say('Start. ' + (notifyHour>0 ? 'Hour '+notifyHour : ''));
+	growl('Start Work', 'Start working.' + (notifyHour>0 ? "\rHours: "+notifyHour : ''));
 }
 
 function state(text) {
@@ -76,6 +90,7 @@ function stopTimer() {
 function stopWork() {
 	working = 0;
 	say('Stop');
+	growl('Stop Work', 'Stop working.');
 }
 
 function toggle() {
